@@ -1,0 +1,10 @@
+models/whisper_cache/
+*.bin
+*.pt
+*.ckpt
+*.pkl
+*.pyc
+__pycache__/
+.env
+venv/
+downloads/
