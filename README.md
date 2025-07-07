@@ -1,127 +1,120 @@
-# 🎓 VISION - AI-Powered Multi-Input Learning Summarizer
+🎓 VISION – AI-Powered Multi-Input Learning Summarizer
+VISION is a full-stack AI assistant that simplifies learning by allowing users to input YouTube videos, PDF files, or manual text — and instantly receive:
 
-**VISION** is a full-stack AI assistant that simplifies learning by allowing users to input **YouTube videos**, **PDF files**, or **manual text** — and instantly receive:
-- ✅ An AI-generated summary (notes-style)
-- ✅ Smart, relevant questions based on content
-- ✅ 📊 A complete record of history stored on a beautiful interactive dashboard
+✅ AI-generated summary (notes-style)
 
----
+✅ Smart, relevant questions based on content
 
-## 🚀 Key Features
+✅ 📊 A complete record of history stored on a beautiful interactive dashboard
 
-### 🔗 Multi-Modal Input Support
-- **YouTube Link:** Converts video to audio, transcribes with **Whisper**, then processes.
-- **PDF Upload:** Extracts text from handwritten or typed notes using custom parsing logic.
-- **Manual Text:** Directly summarize or ask questions from any typed input.
+🚀 Key Features
+🔗 Multi-Modal Input Support
+YouTube Link: Converts video to audio, transcribes with Whisper, then processes it.
 
-### 🧠 AI-Driven Processing
-- **Summarization:** Powered by a custom fine-tuned **T5 Transformer** model to produce crisp, human-like summaries.
-- **Question Generation:** Uses **LLaMA3** via **LangChain** for generating smart quiz-style questions from content.
+PDF Upload: Extracts text from handwritten or typed notes using custom parsing logic.
 
-### 🖥️ Frontend (Streamlit UI)
-- Minimal, clean, and modern **dark-mode dashboard**
-- Responsive sidebar navigation between Home, Main App, and Dashboard
-- Realtime UI state management using `st.session_state`
-- Upload and preview content in one seamless interface
+Manual Text: Directly summarize or generate questions from any text you type in.
 
-### 🧪 Backend (FastAPI)
-- Clean, modular FastAPI backend
-- Three robust endpoints:
-  - `/summarize-text`
-  - `/summarize-youtube`
-  - `/summarize-pdf`
-- Uses `pydantic` for input validation
-- Whisper + T5 + LangChain tightly integrated
+🧠 AI-Driven Processing
+Summarization: Powered by a fine-tuned T5 Transformer model to generate clean, human-like summaries.
 
-### ☁️ Data Storage & History Tracking
-- **MongoDB Atlas** used for storing:
-  - Raw input data
-  - Generated summaries
-  - Generated questions
-  - Timestamps, input type, and filenames
-- Fetches history back into the frontend for analysis and dashboarding
+Question Generation: Uses LLaMA3 via LangChain + Groq API to create smart quiz-style questions.
 
-### 🔐 Security & Config Management
-- `.env` used to protect sensitive credentials (MongoDB URL, keys, etc.)
-- All credentials securely loaded via `os.environ`
+🖥️ Frontend (Streamlit UI)
+Minimal, clean, and modern dark-mode dashboard
 
----
+Sidebar navigation: Home, Summarizer, Dashboard
 
-## 📁 Tech Stack
+Real-time UI updates with st.session_state
 
-| Layer        | Technologies                         |
-|-------------|--------------------------------------|
-| Frontend    | Streamlit (UI, Dashboard)            |
-| Backend     | FastAPI, Pydantic                    |
-| AI Models   | T5 (Summarization), LLaMA3 (Questions), Whisper (Transcription) |
-| Storage     | MongoDB Atlas (Cloud DB)             |
-| Infra       | Python 3.10, REST APIs, JSON         |
+Upload, view, and reset content seamlessly
 
----
+🧪 Backend (FastAPI)
+Clean, modular FastAPI backend
 
-## 📸 Screenshots (Optional)
-> _(Add them once deployed or tested locally — even 2-3 make a big difference)_
+Three powerful endpoints:
 
-- ✅ Summary and Question Output
-- 📄 PDF Input and Processing
-- 🎥 YouTube Transcription and Results
-- 📊 MongoDB-driven History Dashboard
+/summarize-text
 
----
+/summarize-youtube
 
-## 🧠 Ideal Use Cases
+/summarize-pdf
 
-- Students needing quick study notes from lectures
-- Competitive exam prep from online classes or coaching PDFs
-- Teachers creating question banks from existing materials
-- Researchers summarizing long documents quickly
+Built with pydantic, os, and integrated AI model logic
 
----
+☁️ Data Storage & History Tracking
+MongoDB Atlas handles:
 
-## ⚙️ Setup Instructions
+Input (text / links / file names)
 
-1. **Clone the repo:**
-   ```bash
-   git clone https://github.com/Priyankshu-07/VISION.git
-   cd VISION
-Create a virtual environment:
+Generated summaries and questions
 
+Timestamp, source type
+
+Frontend dashboard fetches this data dynamically
+
+🔐 Security & Config Management
+.env file protects credentials (like MongoDB connection)
+
+Secrets are loaded securely using os.environ
+
+📁 Tech Stack
+Layer	Technologies
+Frontend	Streamlit
+Backend	FastAPI, Pydantic
+AI Models	T5 (Summarization), LLaMA3 via Groq (Questions), Whisper (Transcription)
+Database	MongoDB Atlas
+Language	Python 3.10
+
+🧠 Ideal Use Cases
+Students who need quick revision notes from lectures
+
+Exam prep from long YouTube classes or PDF notes
+
+Teachers creating question banks from study materials
+
+Researchers summarizing academic documents
+
+⚙️ Setup Instructions
+1. Clone the Repository
+bash
+Copy
+Edit
+git clone https://github.com/Priyankshu-07/VISION.git
+cd VISION
+2. Create and Activate Virtual Environment
 bash
 Copy
 Edit
 python -m venv venv
 venv\Scripts\activate
-Install dependencies:
-
+3. Install Dependencies
 bash
 Copy
 Edit
 pip install -r requirements.txt
-Setup your .env:
+4. Set up .env
+Create a .env file in the root directory and add:
 
-env
+ini
 Copy
 Edit
 MONGO_URL=mongodb+srv://<your-db-url>
-Run the backend:
-
+5. Run the Backend
 bash
 Copy
 Edit
 uvicorn backend.main:app --reload
-Run the frontend:
-
+6. Run the Frontend
 bash
 Copy
 Edit
 streamlit run frontend/app.py
-✨ Credits
-🧠 Model training & integration by Priyankshu-07
-
-🤝 Project guidance and architecture: ChatGPT (OpenAI)
-
 📌 Status
 🟢 Project Completed
+
 🧪 Testing: ✅
-💻 Local: ✅
-🌐 GitHub: ✅
+
+💻 Local Deployment: ✅
+
+🌐 GitHub Hosting: ✅

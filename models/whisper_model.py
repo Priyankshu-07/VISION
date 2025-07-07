@@ -4,11 +4,11 @@ def transcribe_model(file_path):
     print("⏳ Loading Faster-Whisper model...")
     cache_path = os.path.join(os.path.dirname(__file__), "whisper_cache")
     os.makedirs(cache_path, exist_ok=True)
-    model_size = "base"  # use "tiny" for speed, "small" for more accuracy
+    model_size = "base"  
     model = WhisperModel(
         model_size,
-        compute_type="int8",           # perfect for CPU-only systems
-        download_root=cache_path       # local cache folder
+        compute_type="int8",           
+        download_root=cache_path       
     )
     print("🎧 Transcribing audio...")
     segments, _ = model.transcribe(file_path)

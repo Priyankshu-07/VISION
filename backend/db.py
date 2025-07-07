@@ -6,8 +6,10 @@ from datetime import datetime
 load_dotenv()
 MONGO_URL = os.getenv("MONGO_URL")
 client = MongoClient(MONGO_URL)
-db = client["VISION"]  # DB name
-collection = db["results"]    # Collection name
+print("✅ Databases:", client.list_database_names())
+
+db = client["VISION"] 
+collection = db["results"]    
 def save_to_mongo(input_type, input_text, summary, questions):
     try:
         doc = {

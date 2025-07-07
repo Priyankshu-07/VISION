@@ -1,4 +1,4 @@
-# backend/langchain_helper.py
+
 import os
 from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
