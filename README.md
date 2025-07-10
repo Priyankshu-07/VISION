@@ -1,120 +1,145 @@
-🎓 VISION – AI-Powered Multi-Input Learning Summarizer
-VISION is a full-stack AI assistant that simplifies learning by allowing users to input YouTube videos, PDF files, or manual text — and instantly receive:
+# 🔮 VISION – AI-Powered Multi-Input Learning Summarizer
 
-✅ AI-generated summary (notes-style)
+VISION is a futuristic full-stack AI assistant that revolutionizes how students, educators, and researchers absorb information. With multi-modal input support, blazing-fast inference, and a clean, modern UI, VISION transforms long-form content (YouTube lectures, PDFs, and typed notes) into structured summaries and intelligent quiz-style questions — all backed by cutting-edge AI and stored in a dynamic, user-friendly dashboard.
 
-✅ Smart, relevant questions based on content
+---
 
-✅ 📊 A complete record of history stored on a beautiful interactive dashboard
+## 🚀 Features at a Glance
 
-🚀 Key Features
-🔗 Multi-Modal Input Support
-YouTube Link: Converts video to audio, transcribes with Whisper, then processes it.
+✨ **Multi-Input Modes**
+- 🎥 **YouTube Videos** – Convert lecture videos to audio, transcribe with [OpenAI Whisper](https://github.com/openai/whisper), and summarize instantly.
+- 📄 **PDF Uploads** – Extract text from typed or handwritten PDFs.
+- 📝 **Manual Text** – Directly input text for summarization and question generation.
 
-PDF Upload: Extracts text from handwritten or typed notes using custom parsing logic.
+🧠 **AI-Driven Intelligence**
+- 🧾 **Summarization** – Fine-tuned [T5 Transformer](https://huggingface.co/t5-base) model generates crisp, notes-style summaries.
+- ❓ **Question Generation** – Powered by [LLaMA3](https://ai.meta.com/llama/) via [Groq API](https://console.groq.com/) and orchestrated using [LangChain](https://www.langchain.com/).
 
-Manual Text: Directly summarize or generate questions from any text you type in.
+💻 **Frontend (Streamlit UI)**
+- 🌒 Minimalistic dark-themed UI
+- 📂 Upload content and visualize output seamlessly
+- 📊 View history on an interactive dashboard
+- ♻️ Real-time updates with `st.session_state`
 
-🧠 AI-Driven Processing
-Summarization: Powered by a fine-tuned T5 Transformer model to generate clean, human-like summaries.
+🧪 **Backend (FastAPI)**
+- 🔌 Modular, production-ready architecture
+- 🛠️ 3 main endpoints:
+  - `/summarize-text`
+  - `/summarize-youtube`
+  - `/summarize-pdf`
+- ✅ Powered by `pydantic`, `uvicorn`, `os`, and custom model logic
 
-Question Generation: Uses LLaMA3 via LangChain + Groq API to create smart quiz-style questions.
+🌐 **Database & Storage (MongoDB Atlas)**
+- Stores inputs, summaries, questions, timestamps, and input types
+- Integrated with dashboard for historical tracking and analytics
 
-🖥️ Frontend (Streamlit UI)
-Minimal, clean, and modern dark-mode dashboard
+🔐 **Secure Config Management**
+- Credentials secured via `.env` and `os.environ`
+- MongoDB secrets hidden from source control
 
-Sidebar navigation: Home, Summarizer, Dashboard
+---
 
-Real-time UI updates with st.session_state
+## 🧠 Tech Stack
 
-Upload, view, and reset content seamlessly
+| Layer       | Technology                                                                 |
+|------------|----------------------------------------------------------------------------|
+| **Frontend** | [Streamlit](https://streamlit.io/)                                         |
+| **Backend**  | [FastAPI](https://fastapi.tiangolo.com/), [Pydantic](https://pydantic.dev/) |
+| **AI Models**| T5 (Summarization), Whisper (Transcription), LLaMA3 + Groq (QnA)          |
+| **RAG + Orchestration** | [LangChain](https://www.langchain.com/) + Groq + LLaMA3                     |
+| **Database** | [MongoDB Atlas](https://www.mongodb.com/atlas)                            |
+| **Language** | Python 3.10                                                               |
 
-🧪 Backend (FastAPI)
-Clean, modular FastAPI backend
+---
 
-Three powerful endpoints:
+## 🧠 Ideal Use Cases
 
-/summarize-text
+- 📚 **Students** – Auto-generate revision notes and MCQs from YouTube lectures and class notes
+- 👨‍🏫 **Educators** – Create question banks from teaching materials
+- 🔬 **Researchers** – Summarize and analyze long academic PDFs and research papers
+- 📈 **Self-learners** – Simplify long video tutorials or e-books
 
-/summarize-youtube
+---
 
-/summarize-pdf
+## 📦 Folder Structure
 
-Built with pydantic, os, and integrated AI model logic
+VISION/
+│
+├── backend/ # FastAPI backend logic & API routes
+│ └── main.py
+│
+├── frontend/ # Streamlit UI components
+│ └── app.py
+│
+├── models/ # Custom AI models & helpers (T5, Whisper)
+│ ├── summarizer.py
+│ ├── transcriber.py
+│ └── question_generator.py
+│
+├── .vscode/ # IDE configuration (optional)
+├── .env # Environment variables (MongoDB URI etc.)
+├── requirements.txt # Python dependencies
+└── README.md # You're reading it!
 
-☁️ Data Storage & History Tracking
-MongoDB Atlas handles:
-
-Input (text / links / file names)
-
-Generated summaries and questions
-
-Timestamp, source type
-
-Frontend dashboard fetches this data dynamically
-
-🔐 Security & Config Management
-.env file protects credentials (like MongoDB connection)
-
-Secrets are loaded securely using os.environ
-
-📁 Tech Stack
-Layer	Technologies
-Frontend	Streamlit
-Backend	FastAPI, Pydantic
-AI Models	T5 (Summarization), LLaMA3 via Groq (Questions), Whisper (Transcription)
-Database	MongoDB Atlas
-Language	Python 3.10
-
-🧠 Ideal Use Cases
-Students who need quick revision notes from lectures
-
-Exam prep from long YouTube classes or PDF notes
-
-Teachers creating question banks from study materials
-
-Researchers summarizing academic documents
-
-⚙️ Setup Instructions
-1. Clone the Repository
-bash
+yaml
 Copy
 Edit
+
+---
+
+## ⚙️ Getting Started
+
+### 1️⃣ Clone the Repository
+
+```bash
 git clone https://github.com/Priyankshu-07/VISION.git
 cd VISION
-2. Create and Activate Virtual Environment
+2️⃣ Set Up Python Environment
 bash
 Copy
 Edit
 python -m venv venv
-venv\Scripts\activate
-3. Install Dependencies
+venv\Scripts\activate        # On Windows
+3️⃣ Install Dependencies
 bash
 Copy
 Edit
 pip install -r requirements.txt
-4. Set up .env
-Create a .env file in the root directory and add:
+4️⃣ Configure Environment
+Create a .env file in the root directory:
 
-ini
+env
 Copy
 Edit
-MONGO_URL=mongodb+srv://<your-db-url>
-5. Run the Backend
+MONGO_URL=your_mongodb_atlas_connection_string
+5️⃣ Run Backend Server
 bash
 Copy
 Edit
 uvicorn backend.main:app --reload
-6. Run the Frontend
+6️⃣ Run Frontend Streamlit App
 bash
 Copy
 Edit
 streamlit run frontend/app.py
-📌 Status
-🟢 Project Completed
+📌 Current Status
+✅ Summarization tested (T5 Model)
 
-🧪 Testing: ✅
+✅ YouTube transcription tested (Whisper)
 
-💻 Local Deployment: ✅
+✅ Question generation working via Groq API
 
-🌐 GitHub Hosting: ✅
+✅ MongoDB integration done
+
+✅ FastAPI routes active and connected
+
+✅ Streamlit frontend fully integrated
+
+🌐 Live Demo & Hosting
+You can deploy this app via:
+
+Render
+
+Railway
+
+Streamlit Community Cloud
