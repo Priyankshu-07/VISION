@@ -1,5 +1,4 @@
 from backend.langchain_helper import question_chain
-
 def generate_questions(text, enabled=True):
     if not enabled or not text.strip():
         return []

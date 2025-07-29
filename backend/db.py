@@ -20,12 +20,12 @@ def save_to_mongo(input_type, input_text, summary, questions):
             "timestamp": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
         }
         collection.insert_one(doc)
-        print("✅ Saved to MongoDB")
+        print(" Saved to MongoDB")
     except Exception as e:
-        print("❌ Error saving to MongoDB:", str(e))
+        print(" Error saving to MongoDB:", str(e))
 def fetch_recent(limit=10):
     try:
         return list(collection.find().sort("timestamp", -1).limit(limit))
     except Exception as e:
-        print("❌ Failed to fetch history:", e)
+        print(" Failed to fetch history:", e)
         return []

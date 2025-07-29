@@ -16,15 +16,15 @@ def summarize_text(input: TextInput):
     if not input.text.strip():
         raise HTTPException(status_code=400, detail="Text is empty")
     summary, questions = None, None
-    print("📝 Received text input for summarization")
+    print(" Received text input for summarization")
     if input.generate_summary:
-        print("⏳ Generating summary...")
+        print(" Generating summary...")
         summary = T5.summarize_text(input.text)
-        print("✅ Summary generated")
+        print(" Summary generated")
     if input.generate_questions:
-        print("❓ Generating questions...")
+        print(" Generating questions...")
         questions = question_generator.generate_questions(input.text, enabled=True)
-        print("✅ Questions generated")
+        print(" Questions generated")
     db.save_to_mongo(
         input_type="text",
         input_text=input.text,
@@ -37,25 +37,25 @@ def summarize_youtube(
     url: str = Form(...),
     include: str = Form("summary")
 ):
-    print("🔥 Received YouTube URL:", url)
+    print(" Received YouTube URL:", url)
     try:
         transcription = youtube_transcriber.transcribe_youtube(url)
-        print("✅ Transcription completed")
-        print("🧠 Transcript preview:", transcription[:200])
+        print(" Transcription completed")
+        print(" Transcript preview:", transcription[:200])
 
         includes = [x.strip().lower() for x in include.split(",")]
         response = {}
         summary, questions = None, None
         if "summary" in includes:
-            print("⏳ Generating summary...")
+            print(" Generating summary...")
             summary = T5.summarize_text(transcription)
-            print("✅ Summary generated")
+            print(" Summary generated")
             response["summary"] = summary
 
         if "questions" in includes:
-            print("❓ Generating questions...")
+            print(" Generating questions...")
             questions = question_generator.generate_questions(transcription, enabled=True)
-            print("✅ Questions generated")
+            print(" Questions generated")
             response["questions"] = questions
         if "transcription" in includes:
             response["transcription"] = transcription
@@ -67,34 +67,34 @@ def summarize_youtube(
         )
         return response
     except Exception as e:
-        print("❌ Error during YouTube processing:", str(e))
+        print(" Error during YouTube processing:", str(e))
         raise HTTPException(status_code=500, detail=f"Error during YouTube processing: {str(e)}")
 @app.post("/summarize-pdf/")
 async def summarize_pdf(
     file: UploadFile = File(...),
     include: str = Form("summary")
 ):
-    print("📥 Received PDF:", file.filename)
+    print(" Received PDF:", file.filename)
     try:
         contents = await file.read()
-        print("📂 Reading PDF contents...")
+        print(" Reading PDF contents...")
         text = pdf_reader.get_text_from_pdf(contents)
-        print("✅ PDF text extracted")
-        print("📝 PDF Text Preview:", text[:200])
+        print(" PDF text extracted")
+        print(" PDF Text Preview:", text[:200])
         if not text.strip():
             raise HTTPException(status_code=400, detail="PDF appears to be empty or unreadable.")
         includes = [x.strip().lower() for x in include.split(",")]
         response = {}
         summary, questions = None, None
         if "summary" in includes:
-            print("⏳ Generating summary...")
+            print(" Generating summary...")
             summary = T5.summarize_text(text)
-            print("✅ Summary generated")
+            print(" Summary generated")
             response["summary"] = summary
         if "questions" in includes:
-            print("❓ Generating questions...")
+            print(" Generating questions...")
             questions = question_generator.generate_questions(text, enabled=True)
-            print("✅ Questions generated")
+            print(" Questions generated")
             response["questions"] = questions
         db.save_to_mongo(
             input_type="pdf",
@@ -104,7 +104,7 @@ async def summarize_pdf(
         )
         return response
     except Exception as e:
-        print("❌ Error during PDF processing:", str(e))
+        print(" Error during PDF processing:", str(e))
         raise HTTPException(status_code=500, detail=f"Error during PDF processing: {str(e)}")
 @app.get("/health")
 def health_check():

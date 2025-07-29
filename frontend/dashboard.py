@@ -2,7 +2,7 @@ import streamlit as st
 import pymongo
 import os
 def show():
-    st.title("📊 Dashboard – History of Summaries")
+    st.title(" Dashboard – History of Summaries")
     try:
         MONGO_URL = os.getenv("MONGO_URL")
         client = pymongo.MongoClient(MONGO_URL)
@@ -13,15 +13,15 @@ def show():
             st.info("No history yet. Start summarizing something first.")
             return
         for entry in entries:
-            with st.expander(f"📌 {entry.get('input_type')} | {entry.get('timestamp')}"):
+            with st.expander(f" {entry.get('input_type')} | {entry.get('timestamp')}"):
                 st.markdown(f"**Input:** `{entry.get('input_value', '')}`")
 
                 if entry.get("summary"):
-                    st.markdown("#### 📃 Summary")
+                    st.markdown("####  Summary")
                     st.success(entry["summary"])
 
                 if entry.get("questions"):
-                    st.markdown("#### ❓ Questions")
+                    st.markdown("####  Questions")
                     for i, q in enumerate(entry["questions"], 1):
                         st.write(f"**Q{i}.** {q}")
     except Exception as e:
