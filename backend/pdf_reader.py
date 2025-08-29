@@ -1,11 +1,11 @@
 import pdfplumber
 from io import BytesIO
-
-def get_text_from_pdf(pdf_data: bytes) -> str:
-    all_text = ""
-    with pdfplumber.open(BytesIO(pdf_data)) as pdf:
-        for page in pdf.pages:
-            text = page.extract_text()
-            if text:
-                all_text += text + "\n"
-    return all_text.strip()
+def get_text_from_pdf(pdf_data):
+    my_text = ""
+    pdf_file = pdfplumber.open(BytesIO(pdf_data))
+    for one_page in pdf_file.pages:
+        words_on_page = one_page.extract_text()
+        if words_on_page:
+            my_text = my_text + words_on_page + "\n"
+    pdf_file.close()
+    return my_text
